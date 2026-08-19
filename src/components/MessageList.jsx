@@ -6,7 +6,7 @@ import { useTheme } from "../context/ThemeContext";
 
 function MessageList() {
   const { isDarkMode } = useTheme();
-  const { getCurrentConversation, isLoading, apiKey } = useApp();
+  const { getCurrentConversation, isLoading } = useApp();
   const messagesEndRef = useRef(null);
 
   const currentConversation = getCurrentConversation();
@@ -18,9 +18,12 @@ function MessageList() {
   if (!currentConversation || currentConversation.messages.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-full text-center px-4">
-        <SMARTLogo className="w-25 h-28 text-gray-500 mb-4" />
+        <span className="font-Corinthia absolute inset-0 flex items-center justify-center text-8xl font-bold text-[#2dc5f1]/10 pointer-events-none select-none">
+          System for Maintenance Assistance , Research and Technical expertise
+        </span>
+        <SMARTLogo className="w-25 h-30 text-gray-500 mb-4" />
         <h2
-          className={` italic max-w-md mb-4 ${
+          className={` italic font-Corinthia text-3xl max-w-md mb-4 ${
             isDarkMode ? "text-white" : "text-gray-900"
           }`}
         >
@@ -58,7 +61,7 @@ function MessageList() {
               <div className="w-8 h-8 shrink-0">
                 {/* Conditional Rendering */}
                 {message.sender === "user" ? (
-                  <div className="w-8 h-8 bg-linear-to-br from-blue-500 to-blue-900 rounded-full flex items-center justify-center shadow-md">
+                  <div className="w-8 h-8 bg-linear-to-br from-[#008fb9] to-[#2dc5f1] rounded-full flex items-center justify-center shadow-md">
                     <User className="w-4 h-4 text-white" />
                   </div>
                 ) : (
@@ -79,13 +82,13 @@ function MessageList() {
                 className={`px-4 py-3 rounded-2xl shadow-sm ${
                   message.sender === "user"
                     ? isDarkMode
-                      ? "bg-blue-600 text-white"
-                      : "bg-blue-500 text-white"
+                      ? "bg-gray-800 text-white"
+                      : "bg-white text-black"
                     : isDarkMode
-                      ? "bg-gray-700 text-gray-100 border-gray-600"
-                      : "bg-white text-gray-900 border-gray-200"
+                      ? "bg-gray-600 text-gray-100 border-gray-600"
+                      : "bg-[#ffe3e9] text-gray-900 border-gray-200"
                 } ${
-                  message.sender === "user" ? "rounded-br-sm" : "rounded-bl-sm"
+                  message.sender === "user" ? "rounded-tr-sm" : "rounded-tl-sm"
                 }`}
               >
                 <p className="text-[15px] leading-relaxed whitespace-pre-wrap break-word">

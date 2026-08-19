@@ -18,11 +18,19 @@ function Sidebar() {
   return (
     <div
       className={`${
-        sidebarOpen ? "w-64" :"w-0"
-      } transition-all duration-300 flex flex-col overflow-hidden ${
+        sidebarOpen 
+          ? "w-64 translate-x-0 opacity-100"
+          : "w-64 -translate-x-full opacity-0 md:w-0 md:translate-x-0 md:opacity-100"
+      } fixed inset-y-0 left-0 z-40 flex flex-col overflow-hidden
+        transition-[transform,opacity,width]
+        duration-300
+        ease-out
+        shadow-2xl
+        rounded-br-xl
+        md:relative md:inset auto md:z-auto md:shadow-none ${
         isDarkMode
-          ? "bg-gray-950 text-white border-r border-gray-800"
-          : "bg-white-50 text-gray-900 border-r border-gray-200"
+          ? "bg-gray-800 text-white border-r border-gray-800"
+          : "bg-linear-135 from-[#008fb9] to-[#2dc5f1] border-none text-gray-900 border-r border-gray-500"
       }`}
     >
       {/* New chat button */}
@@ -32,7 +40,7 @@ function Sidebar() {
           className={`w-full flex items-center gap-3 p-3 rounded-lg border transition-all ${
             isDarkMode
             ? "border-gray-800 bg-gray-900 hover:bg-gray-800 text-white" 
-            : "border-gray-300 bg-white hover:bg-gray-100"
+            : "border-gray-300 bg-[#c4f9ff] hover:bg-[#a2e3f6]"
           }`}
         >
           <Plus className="w-4 h-4" />
@@ -51,9 +59,9 @@ function Sidebar() {
               <div
                 className={`group flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all mb-1 ${ 
                   isDarkMode 
-                    ? "bg-gray-800 border border-gray-700" 
-                    : "bg-gray-200 border border-gray-300"
-                  } ${isDarkMode ? "hover:bg-gray-900" : "hover:bg-gray-100"}`}
+                    ? "bg-gray-700 border border-gray-700" 
+                    : "bg-[#2dc5f1] border border-[#2dc5f1]"
+                  } ${isDarkMode ? "hover:bg-gray-900" : "hover:bg-[#c4f9ff]"}`}
                   onClick = {() => setActiveConversationId(conversation.id)}
               >
                 <MessageSquare className="w-4 h-4 shrink-0" />
@@ -77,7 +85,7 @@ function Sidebar() {
       </div>
 
       {/* Footer */}
-      <div className={`p-3 border-t ${isDarkMode ? "border-gray-800" : "border-gray-200"}`}>
+      <div className={`p-3 border-t border-none`}>
         {/* Clear All Chats */}
         {/* Conditionnal Rendering */}
         {conversations.length > 0 && (
@@ -85,7 +93,7 @@ function Sidebar() {
             className={`w-full flex items-center gap-3 p-2 rounded-lg transition-all text-sm mb-2 ${
               isDarkMode 
                 ? "hover:bg-gray-900 text-red-400" 
-                : "hover:bg-gray-100 text-red-600"
+                : "hover:bg-[#2dc5f1] text-red-600"
               }`}
               onClick = {clearAllConversation}
           >

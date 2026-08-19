@@ -1,1 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Pangolin&display=swap');
+
 @import "tailwindcss";
+
+@theme {
+     --font-poppins: "Pangolin", sans-serif;
+     --font-Corinthia: "Corinthia", sans-serif;
+}
+
+body {
+  font-family: "Pangolin", sans-serif, bold;
+}

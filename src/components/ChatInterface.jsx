@@ -8,8 +8,11 @@ import { useApp } from "../context/AppContext";
 
 function ChatInterface() {
   const { isDarkMode, toggleTheme } = useTheme();
-  const { activeConversationId, conversations } = useApp();
-  const { setSideBarOpen } = useApp();
+  const { activeConversationId, 
+          conversations,
+          sidebarOpen,
+          setSideBarOpen,
+        } = useApp();
 
   const currentConversation = conversations.find(
     (conv) => conv.id === activeConversationId,
@@ -18,24 +21,34 @@ function ChatInterface() {
   return (
     <div className="flex h-screen">
       <Sidebar />
+      <button
+        type="button"
+        aria-label="Fermer la sidebar"
+        className= {`fixed inset-0 z-30 bg-black/40 transition-opacity duration-300 ease-out md:hidden ${
+          sidebarOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setSideBarOpen(false)}
+      />
 
       {/* Main Content */}
       <div
-        className={`flex-1 flex flex-col ${isDarkMode ? "bg-gray-900" : "bg-white"}`}
+        className={`flex-1 flex flex-col ${isDarkMode ? "bg-gray-700" : "bg-[#f4feff]"}`}
       >
         {/* Header */}
         <div
-          className={`flex items-center justify-between p-4 border-b ${
+          className={`flex items-center justify-between p-4 border-b rounded-br-xl ${
             isDarkMode
-              ? "bg-gray-950 border-gray-800"
-              : "border-gray-200 bg-white"
+              ? "bg-gray-800 border-gray-800"
+              : "border-gray-300 bg-linear-180 from-[#008fb9] to-[#2dc5f1]"
           }`}
         >
           <div className="flex items-center gap-3">
             {/* Menu Toggle */}
             <button
               className={`p-2 rounded-lg transition-all ${
-                isDarkMode ? "hover:bg-gray-800" : "hover:bg-gray-100"
+                isDarkMode ? "hover:bg-gray-800" : "bg-[#2dc5f1] hover:bg-[#a2e3f6]"
               }`}
               onClick={() => setSideBarOpen((prev) => !prev)}
             >
@@ -54,12 +67,13 @@ function ChatInterface() {
               {currentConversation?.title || "SMART"}
             </h1>
           </div>
+          
 
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
             className={`p-2 rounded-lg transition-all ${
-              isDarkMode ? "hover:bg-gray-800" : "hover:bg-gray-100"
+              isDarkMode ? "hover:bg-gray-800" : " bg-[#2dc5f1] hover:bg-[#a2e3f6]"
             }`}
             aria-label={
               isDarkMode ? "Switch to light mode" : "Switch to dark mode"
