@@ -1,5 +1,5 @@
 export const CONFIG = {
-  MODEL_API_URL: "https://paintings-further-heavily-protocols.trycloudflare.com",
+  MODEL_API_URL: "",
   MAX_TOKENS: 2000,
   TEMPERATURE: 0.2,
 };

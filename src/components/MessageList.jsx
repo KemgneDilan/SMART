@@ -19,7 +19,7 @@ function MessageList() {
     return (
       <div className="flex flex-col items-center justify-center h-full text-center px-4">
         <span className="font-Corinthia absolute inset-0 flex items-center justify-center text-8xl font-bold text-[#2dc5f1]/10 pointer-events-none select-none">
-          System for Maintenance Assistance , Research and Technical expertise
+        System for Maintenance Assistance , Research and Technical expertise
         </span>
         <SMARTLogo className="w-25 h-30 text-gray-500 mb-4" />
         <h2

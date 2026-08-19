@@ -29,7 +29,7 @@ function Sidebar() {
         rounded-br-xl
         md:relative md:inset auto md:z-auto md:shadow-none ${
         isDarkMode
-          ? "bg-gray-800 text-white border-r border-gray-800"
+          ? "bg-linear-135 from-[#002835] to-[#005e78] text-white border-r border-gray-800"
           : "bg-linear-135 from-[#008fb9] to-[#2dc5f1] border-none text-gray-900 border-r border-gray-500"
       }`}
     >

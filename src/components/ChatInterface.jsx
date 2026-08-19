@@ -34,13 +34,13 @@ function ChatInterface() {
 
       {/* Main Content */}
       <div
-        className={`flex-1 flex flex-col ${isDarkMode ? "bg-gray-700" : "bg-[#f4feff]"}`}
+        className={`flex-1 flex flex-col ${isDarkMode ? "bg-[#112d41]" : "bg-[#f4feff]"}`}
       >
         {/* Header */}
         <div
           className={`flex items-center justify-between p-4 border-b rounded-br-xl ${
             isDarkMode
-              ? "bg-gray-800 border-gray-800"
+              ? "bg-linear-180 from-[#002835] to-[#005e78] border-gray-800"
               : "border-gray-300 bg-linear-180 from-[#008fb9] to-[#2dc5f1]"
           }`}
         >
@@ -67,7 +67,7 @@ function ChatInterface() {
               {currentConversation?.title || "SMART"}
             </h1>
           </div>
-          
+
 
           {/* Theme Toggle */}
           <button
