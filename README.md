@@ -279,3 +279,6 @@ Les conversations sont stockées dans `localStorage`. Elles dépendent de l’or
 
 **Kemgne Dilan**  
 Dépôt : [KemgneDilan/SMART](https://github.com/KemgneDilan/SMART)
+
+<img width="1801" height="977" alt="image" src="https://github.com/user-attachments/assets/8da8592e-89ab-41a7-adfd-d38cae689804" />
+
