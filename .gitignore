@@ -10,6 +10,15 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+.vite
+coverage
+
+# Local environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local-only configuration
 *.local
 
 # Editor directories and files

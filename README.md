@@ -209,6 +209,34 @@ Les données suivantes sont conservées uniquement dans le navigateur :
 
 Les données ne sont pas synchronisées avec un compte utilisateur et disparaissent si le stockage local du navigateur est effacé.
 
+## Publier le projet sur GitHub
+
+Le dépôt distant utilisé par ce projet est [KemgneDilan/SMART](https://github.com/KemgneDilan/SMART). Le fichier `.gitignore` empêche l’ajout des dépendances installées (`node_modules`), des fichiers compilés (`dist`), des caches, des journaux et des fichiers d’environnement locaux. Le `package-lock.json`, nécessaire pour retrouver les mêmes dépendances, doit en revanche rester suivi par Git.
+
+Depuis le dossier du projet, vérifiez d’abord le dépôt configuré et les fichiers qui seront envoyés :
+
+```bash
+git remote -v
+git status
+```
+
+Pour enregistrer et envoyer vos changements :
+
+```bash
+git add .
+git commit -m "Décrire les changements"
+git push -u origin main
+```
+
+Les fois suivantes, après avoir enregistré un nouveau commit, `git push` suffit. Si Git refuse l’envoi parce que le dépôt distant contient des changements, récupérez-les et intégrez-les avant de réessayer :
+
+```bash
+git pull --rebase origin main
+git push
+```
+
+En cas de conflit, corrigez les fichiers signalés, puis terminez le rebase avec `git add <fichier>` et `git rebase --continue`. Ne forcez pas l’envoi avec `--force`, car cela peut écraser des commits distants. Enfin, `.gitignore` ne retire pas du dépôt un fichier déjà suivi : en cas de fichier sensible déjà commité, il faut aussi le retirer de l’index Git et renouveler le secret concerné.
+
 ## État actuel du projet
 
 Réalisé :
