@@ -80,20 +80,16 @@ npm run lint
 
 ## Configuration de l’API
 
-L’adresse du modèle est centralisée dans [src/config/config.js](src/config/config.js) :
+L’application doit appeler un backend de confiance, dont l’adresse de base se configure dans un fichier `.env.local` à la racine du projet. Vous pouvez partir du modèle fourni :
 
-```js
-export const CONFIG = {
-  MODEL_API_URL: "",
-  MAX_TOKENS: 2000,
-  TEMPERATURE: 0.2,
-};
+```bash
+cp .env.example .env.local
 ```
 
-Renseignez `MODEL_API_URL` avec l’adresse de base du service. Par exemple :
+Adaptez ensuite cette variable dans `.env.local` :
 
-```js
-MODEL_API_URL: "http://localhost:8000/api",
+```dotenv
+VITE_MODEL_API_URL=http://localhost:8000/api
 ```
 
 Dans ce cas, l’application appellera :
@@ -130,9 +126,9 @@ Le service affiche dans l’interface les erreurs HTTP renvoyées au format suiv
 }
 ```
 
-Pour éviter les problèmes CORS en développement, une configuration proxy peut être ajoutée dans [vite.config.js](vite.config.js). Le proxy existant cible actuellement `https://api.openai.com` sous le chemin `/api/openai`, mais il ne constitue pas un backend complet : le frontend envoie un format JSON personnalisé avec `/generate`, qui doit être pris en charge par le service choisi.
+Le backend doit gérer l’accès au fournisseur de modèle et autoriser les appels provenant de l’application. Le proxy de développement dans [vite.config.js](vite.config.js) cible actuellement `https://api.openai.com` sous le chemin `/api/openai`, mais il ne constitue pas un backend complet : le frontend envoie un format JSON personnalisé avec `/generate`, qui doit être pris en charge par le service choisi.
 
-Ne placez jamais une clé API sensible directement dans le code du frontend. Pour une véritable intégration OpenAI ou autre service distant, utilisez une API intermédiaire exécutée côté serveur.
+**Ne mettez jamais de clé OpenAI ou d’autre secret dans le code frontend ni dans une variable `VITE_*`** : les variables Vite sont intégrées au JavaScript livré au navigateur et peuvent être consultées par tous les visiteurs. Stockez la clé uniquement côté serveur, dans la configuration privée de votre backend.
 
 ## Utilisation
 
@@ -211,7 +207,7 @@ Les données ne sont pas synchronisées avec un compte utilisateur et disparaiss
 
 ## Publier le projet sur GitHub
 
-Le dépôt distant utilisé par ce projet est [KemgneDilan/SMART](https://github.com/KemgneDilan/SMART). Le fichier `.gitignore` empêche l’ajout des dépendances installées (`node_modules`), des fichiers compilés (`dist`), des caches, des journaux et des fichiers d’environnement locaux. Le `package-lock.json`, nécessaire pour retrouver les mêmes dépendances, doit en revanche rester suivi par Git.
+Le dépôt distant utilisé par ce projet est [KemgneDilan/SMART](https://github.com/KemgneDilan/SMART). Le fichier `.gitignore` empêche l’ajout des dépendances installées (`node_modules`), des fichiers compilés (`dist`), des caches, des journaux et des fichiers d’environnement locaux. Le modèle `.env.example` ne contient que l’URL publique du backend ; le `package-lock.json`, nécessaire pour retrouver les mêmes dépendances, doit rester suivi par Git.
 
 Depuis le dossier du projet, vérifiez d’abord le dépôt configuré et les fichiers qui seront envoyés :
 
@@ -235,7 +231,7 @@ git pull --rebase origin main
 git push
 ```
 
-En cas de conflit, corrigez les fichiers signalés, puis terminez le rebase avec `git add <fichier>` et `git rebase --continue`. Ne forcez pas l’envoi avec `--force`, car cela peut écraser des commits distants. Enfin, `.gitignore` ne retire pas du dépôt un fichier déjà suivi : en cas de fichier sensible déjà commité, il faut aussi le retirer de l’index Git et renouveler le secret concerné.
+En cas de conflit, corrigez les fichiers signalés, puis terminez le rebase avec `git add <fichier>` et `git rebase --continue`. Ne forcez pas l’envoi avec `--force`, car cela peut écraser des commits distants. `.gitignore` ne retire pas du dépôt un fichier déjà suivi et n’efface pas l’historique Git : si un secret a été commité, révoquez-le immédiatement et purgez-le de tous les commits avant de publier.
 
 ## État actuel du projet
 
